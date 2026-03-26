@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGS Construction Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">AGS Construction Services</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section with Carousel -->
+    <section id="home" class="hero">
+        <!-- Carousel -->
+        <div class="carousel-container">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #1e3a5f, #2c5aa0);">
+                        <span>Modern Construction Excellence 1</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #ff6b35, #ff8551);">
+                        <span>Building Quality Homes 2</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #1e3a5f, #3a6ba5);">
+                        <span>Commercial Project Development 3</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #ffd700, #ffed4e);">
+                        <span>Infrastructure Solutions 4</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #2c5aa0, #4a7fbf);">
+                        <span>Expert Workforce Commitment 5</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #ff6b35, #ffa06b);">
+                        <span>Safety First Projects 6</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #1e3a5f, #2c5aa0);">
+                        <span>Innovative Design Solutions 7</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #ff8551, #ffb396);">
+                        <span>Sustainable Construction 8</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #3a6ba5, #5a8bcf);">
+                        <span>On-Time Delivery Record 9</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image" style="background: linear-gradient(135deg, #ffd700, #ffdb3d);">
+                        <span>Customer Satisfaction Promise 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control prev" onclick="changeSlide(-1)">❮</button>
+            <button class="carousel-control next" onclick="changeSlide(1)">❯</button>
+
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+                <span class="dot" onclick="currentSlide(7)"></span>
+                <span class="dot" onclick="currentSlide(8)"></span>
+                <span class="dot" onclick="currentSlide(9)"></span>
+                <span class="dot" onclick="currentSlide(10)"></span>
+            </div>
+        </div>
+
+        <!-- Hero Content Overlay -->
+        <div class="hero-content">
+            <h1>Welcome to AGS Construction Services</h1>
+            <p>Building Your Dreams with Excellence and Expertise</p>
+            <button class="cta-button" onclick="scrollToSection('projects')">View Our Projects</button>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>AGS Construction Services is a leading construction company with over 20 years of experience in delivering high-quality building solutions. Our team of skilled professionals is committed to excellence in every project we undertake.</p>
+                    <h3>Our Mission</h3>
+                    <p>We aim to be the most trusted construction partner in the region, delivering innovative solutions with exceptional quality, safety, and customer satisfaction.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏗️</div>
+                        <h4>Professional Team</h4>
+                        <p>Experienced engineers and architects dedicated to quality.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✓</div>
+                        <h4>Quality Assured</h4>
+                        <p>ISO certified processes and rigorous quality control.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⏱️</div>
+                        <h4>On-Time Delivery</h4>
+                        <p>We respect your timeline and deliver on schedule.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Our Projects</h2>
+            
+            <!-- Project Category Tabs -->
+            <div class="project-tabs">
+                <button class="tab-btn active" onclick="switchProjectTab(event, 'residential')">Residential</button>
+                <button class="tab-btn" onclick="switchProjectTab(event, 'commercial')">Commercial</button>
+                <button class="tab-btn" onclick="switchProjectTab(event, 'services')">Services</button>
+            </div>
+
+            <!-- Residential Projects -->
+            <div id="residential" class="project-category active">
+                <div class="projects-grid">
+                    <div class="project-card" onclick="openModal('proj1')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Modern Residential Complex</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Modern Residential Complex</h3>
+                            <p>150 Units | Downtown District</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj2')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Luxury Apartments</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Luxury Apartments</h3>
+                            <p>80 Units | Waterfront</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj3')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Family Housing Complex</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Family Housing Complex</h3>
+                            <p>200 Units | Suburban Area</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commercial Projects -->
+            <div id="commercial" class="project-category">
+                <div class="projects-grid">
+                    <div class="project-card" onclick="openModal('proj4')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Downtown Office Building</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Downtown Office Building</h3>
+                            <p>15 Stories | Business District</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj5')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Shopping Mall Complex</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Shopping Mall Complex</h3>
+                            <p>200+ Stores | Shopping District</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj6')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Tech Park Complex</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Tech Park Complex</h3>
+                            <p>5 Buildings | Innovation Hub</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Projects -->
+            <div id="services" class="project-category">
+                <div class="projects-grid">
+                    <div class="project-card" onclick="openModal('proj7')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Highway Extension Project</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Highway Extension Project</h3>
+                            <p>12 km | Regional Highway</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj8')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Bridge Construction</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Bridge Construction</h3>
+                            <p>1.5 km Span | River Valley</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="openModal('proj9')">
+                        <div class="project-image">
+                            <div class="image-placeholder">Utility Infrastructure</div>
+                        </div>
+                        <div class="project-info">
+                            <h3>Utility Infrastructure</h3>
+                            <p>25 km Network | City-wide</p>
+                            <p class="hover-text">Click to view details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Construction Avenue<br>Building City, BC 12345</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@agsconstruction.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required id="name">
+                        <span class="error" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required id="email">
+                        <span class="error" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Your Phone" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required id="message"></textarea>
+                        <span class="error" id="messageError"></span>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <div class="success-message" id="successMessage">Message sent successfully!</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AGS Construction Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
