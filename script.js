@@ -1,3 +1,37 @@
+// ========== Page Loading Spinner Management ==========
+const loadingSpinner = document.getElementById('loadingSpinner');
+
+// Show spinner on page start
+function showSpinner() {
+    if (loadingSpinner) {
+        loadingSpinner.classList.remove('hidden');
+    }
+}
+
+// Hide spinner when page fully loads
+function hideSpinner() {
+    if (loadingSpinner) {
+        loadingSpinner.classList.add('hidden');
+        // Remove spinner from DOM after animation completes
+        setTimeout(() => {
+            if (loadingSpinner.parentNode) {
+                loadingSpinner.style.pointerEvents = 'none';
+            }
+        }, 500);
+    }
+}
+
+// Handle page load completion
+if (document.readyState === 'loading') {
+    showSpinner();
+    document.addEventListener('DOMContentLoaded', hideSpinner);
+} else {
+    hideSpinner();
+}
+
+// Also hide when window fully loads (including images, stylesheets, etc.)
+window.addEventListener('load', hideSpinner);
+
 // ========== Navigation Menu Toggle ==========
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
@@ -14,6 +48,16 @@ navLinks.forEach(link => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     });
+});
+
+// Close menu when clicking outside on mobile
+document.addEventListener('click', (e) => {
+    const isClickInsideNav = navMenu.contains(e.target);
+    const isClickOnHamburger = hamburger.contains(e.target);
+    if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
 });
 
 // ========== Smooth Scroll Function ==========
@@ -73,9 +117,63 @@ function resetAutoplay() {
 window.addEventListener('load', () => {
     showSlide(carouselIndex);
     resetAutoplay();
+    initTouchCarousel();
 });
 
-// ========== Project Tab Switching ==========
+// ========== Touch Support for Carousel (Mobile Swipe) ==========
+let touchStartX = 0;
+let touchEndX = 0;
+
+function initTouchCarousel() {
+    const carousel = document.querySelector('.carousel-container');
+    if (!carousel) return;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleCarouselSwipe();
+    }, false);
+}
+
+function handleCarouselSwipe() {
+    const swipeThreshold = 50; // minimum distance for a swipe
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swiped left, show next slide
+            changeSlide(1);
+        } else {
+            // Swiped right, show previous slide
+            changeSlide(-1);
+        }
+    }
+}
+
+// ========== Mobile Optimization ==========
+// Prevent accidental zoom on double tap for form inputs
+if (document.addEventListener) {
+    document.addEventListener('touchmove', function (e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
+// Improve button touch feedback
+const buttons = document.querySelectorAll('button, .tab-btn, .cta-button, .submit-btn, .carousel-control');
+buttons.forEach(button => {
+    button.style.touchAction = 'manipulation';
+    button.addEventListener('touchstart', function () {
+        this.style.opacity = '0.8';
+    });
+    button.addEventListener('touchend', function () {
+        this.style.opacity = '1';
+    });
+});
 function switchProjectTab(event, tabName) {
     // Hide all project categories
     const categories = document.querySelectorAll('.project-category');

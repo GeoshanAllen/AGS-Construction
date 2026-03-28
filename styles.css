@@ -8,6 +8,8 @@
     --text-light: #666;
     --border-radius: 8px;
     --transition: all 0.3s ease;
+    --safe-area-inset-left: max(12px, env(safe-area-inset-left));
+    --safe-area-inset-right: max(12px, env(safe-area-inset-right));
 }
 
 /* ========== General Styles ========== */
@@ -19,6 +21,8 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -26,6 +30,8 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
 }
 
 .container {
@@ -910,8 +916,153 @@ body {
     }
 }
 
+/* ========== Page Loading Spinner ========== */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    visibility: visible;
+    opacity: 1;
+}
+
+.loading-spinner.hidden {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(21, 235, 57, 0.2);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.spinner-text {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Alternative spinner styles (uncomment to use different style) */
+
+/* Modern gradient spinner */
+.loading-spinner.modern .spinner {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: conic-gradient(from 0deg, var(--primary-color) 0deg, var(--secondary-color) 180deg, transparent 360deg);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+/* Dot spinner */
+.loading-spinner.dots .spinner {
+    width: 50px;
+    height: 50px;
+    border: none;
+    position: relative;
+}
+
+.loading-spinner.dots .spinner::before,
+.loading-spinner.dots .spinner::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.loading-spinner.dots .spinner::before {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: spin 1s linear infinite;
+}
+
+.loading-spinner.dots .spinner::after {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 /* ========== Responsive Design ========== */
+
+/* ===== Large Tablets (1024px - 1440px) ===== */
+@media (max-width: 1023px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .carousel-image span {
+        font-size: 2rem;
+    }
+}
+
+/* ===== Tablets and Medium Devices (768px - 1023px) ===== */
 @media (max-width: 768px) {
+    /* Page Loading Spinner */
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(21, 235, 57, 0.2);
+        border-top: 3px solid var(--primary-color);
+    }
+
+    .spinner-text {
+        font-size: 1rem;
+    }
+
+    /* Navigation */
     .hamburger {
         display: flex;
     }
@@ -932,6 +1083,8 @@ body {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-top: none;
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -946,6 +1099,9 @@ body {
         backdrop-filter: blur(10px);
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
     }
 
     .nav-link::after {
@@ -956,6 +1112,23 @@ body {
         display: none;
     }
 
+    .logo {
+        gap: 0.8rem;
+    }
+
+    .logo-img {
+        width: 45px;
+    }
+
+    .logo strong {
+        font-size: 1.4rem;
+    }
+
+    .logo small {
+        font-size: 0.75rem;
+    }
+
+    /* Hero and Carousel */
     .hero h1 {
         font-size: 2rem;
     }
@@ -977,8 +1150,13 @@ body {
     }
 
     .carousel-control {
-        padding: 10px 15px;
-        font-size: 1.2rem;
+        padding: 12px 16px;
+        font-size: 1.3rem;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .carousel-control.prev {
@@ -989,87 +1167,403 @@ body {
         right: 10px;
     }
 
-    .about-content,
-    .contact-content {
-        grid-template-columns: 1fr;
+    .dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 4px;
     }
 
+    .carousel-indicators {
+        bottom: 15px;
+        gap: 6px;
+    }
+
+    /* Content Sections */
     .about h2,
     .projects h2,
     .contact h2 {
         font-size: 2rem;
     }
 
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem 1.2rem;
+    }
+
+    /* Projects */
     .projects-grid {
         grid-template-columns: 1fr;
     }
 
     .project-tabs {
         gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .tab-btn {
-        padding: 0.6rem 1.2rem;
+        padding: 0.7rem 1.2rem;
         font-size: 0.9rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-}
 
-@media (max-width: 480px) {
-    .logo {
+    /* Forms and Buttons */
+    .cta-button {
+        min-height: 48px;
+        padding: 1rem 2rem;
         font-size: 1rem;
     }
 
-    .hero h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero p {
-        font-size: 0.9rem;
-    }
-
-    .carousel-image span {
-        font-size: 1.2rem;
-    }
-
-    .carousel-container {
-        height: 50vh;
-    }
-
-    .hero-overlay {
-        height: 50vh;
-    }
-
-    .hero-content {
-        padding: 2rem 1rem;
-        min-height: auto;
-    }
-
-    .cta-button {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.95rem;
-    }
-
-    .about-features {
-        gap: 1rem;
-    }
-
-    .feature-card {
-        padding: 1.5rem 1rem;
+    .submit-btn {
+        min-height: 48px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
     }
 
     .contact-form {
         padding: 1.5rem;
     }
 
+    .contact-form input,
+    .contact-form textarea {
+        padding: 1rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 48px;
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+    }
+
+    /* Modal */
     .modal-content {
-        width: 95%;
+        width: 90%;
         padding: 1.5rem;
+        max-width: 500px;
     }
 
     .close {
-        font-size: 1.5rem;
-        right: 0.5rem;
-        top: 0.5rem;
+        font-size: 2rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 1.5rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+/* ===== Small Tablets and Large Phones (480px - 767px) ===== */
+@media (max-width: 640px) {
+    /* Page Loading Spinner */
+    .spinner {
+        width: 45px;
+        height: 45px;
+        border: 3px solid rgba(21, 235, 57, 0.2);
+        border-top: 3px solid var(--primary-color);
+    }
+
+    .spinner-text {
+        font-size: 0.95rem;
+    }
+
+    /* Navigation */
+    .navbar .nav-container {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .logo strong {
+        font-size: 1.3rem;
+    }
+
+    .logo small {
+        font-size: 0.7rem;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 70vh;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+        margin: 1rem;
+        min-height: auto;
+    }
+
+    .hero-logo {
+        width: 80px;
+    }
+
+    .carousel-container {
+        height: 50vh;
+    }
+
+    .carousel-image span {
+        font-size: 1.3rem;
+    }
+
+    .carousel-control {
+        padding: 10px 14px;
+        font-size: 1.1rem;
+    }
+
+    /* Content Sections */
+    .about,
+    .projects,
+    .contact {
+        padding: 40px 0;
+    }
+
+    .about h2,
+    .projects h2,
+    .contact h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .about-text h3 {
+        font-size: 1.3rem;
+    }
+
+    .about-features {
+        gap: 1.2rem;
+    }
+
+    .feature-card {
+        padding: 1.2rem;
+    }
+
+    .feature-icon {
+        font-size: 2.2rem;
+    }
+
+    /* Projects */
+    .project-image {
+        height: 200px;
+    }
+
+    .image-placeholder {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+
+    .project-info {
+        padding: 1.2rem;
+    }
+
+    .project-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .project-info p {
+        font-size: 0.85rem;
+    }
+
+    .tab-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Contact */
+    .contact-info {
+        gap: 1.5rem;
+    }
+
+    .info-item {
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+
+    .info-icon {
+        font-size: 1.8rem;
+    }
+
+    .contact-form {
+        padding: 1.2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 0.9rem;
+    }
+
+    /* Buttons */
+    .cta-button {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+    }
+
+    .submit-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 92%;
+        padding: 1.3rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .footer-logo {
+        width: 50px;
+    }
+}
+
+/* ===== Phones and Small Devices (Up to 479px) ===== */
+@media (max-width: 479px) {
+    /* Page Loading Spinner */
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(21, 235, 57, 0.2);
+        border-top: 3px solid var(--primary-color);
+    }
+
+    .spinner-text {
+        font-size: 0.9rem;
+    }
+
+    /* Global */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Navigation */
+    .navbar {
+        padding: 0.3rem 0;
+    }
+
+    .navbar .nav-container {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo {
+        gap: 0.6rem;
+    }
+
+    .logo-img {
+        width: 40px;
+    }
+
+    .logo strong {
+        font-size: 1.1rem;
+    }
+
+    .logo small {
+        font-size: 0.65rem;
+        display: none;
+    }
+
+    .hamburger span {
+        width: 24px;
+        height: 3px;
+        margin: 3px 0;
+    }
+
+    .nav-menu {
+        padding: 1.5rem 0;
+    }
+
+    .nav-link {
+        padding: 1rem 1.5rem;
+        margin: 0.15rem 0.5rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+
+    .nav-link i {
+        font-size: 0.9rem;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 65vh;
+    }
+
+    .hero::before,
+    .hero::after {
+        width: 100px;
+        height: 150px;
+        opacity: 0.5;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+        margin: 1rem 0.5rem;
+        border-radius: 12px;
+    }
+
+    .hero h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+        font-size: 0.85rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .hero-logo {
+        width: 70px;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Carousel */
+    .carousel-container {
+        height: 45vh;
+        min-height: 250px;
+    }
+
+    .carousel-image span {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .carousel-control {
+        padding: 8px 12px;
+        font-size: 1rem;
+        min-width: 40px;
+        min-height: 40px;
+    }
+
+    .carousel-control.prev {
+        left: 5px;
+    }
+
+    .carousel-control.next {
+        right: 5px;
+    }
+
+    .carousel-indicators {
+        bottom: 10px;
+        gap: 4px;
     }
 
     .dot {
@@ -1077,8 +1571,221 @@ body {
         height: 10px;
     }
 
-    .tab-btn {
-        padding: 0.5rem 1rem;
+    /* Sections */
+    .about,
+    .projects,
+    .contact {
+        padding: 30px 0;
+    }
+
+    .about h2,
+    .projects h2,
+    .contact h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-text h3 {
+        font-size: 1.2rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .about-features {
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+    }
+
+    .feature-card h4 {
+        font-size: 1rem;
+    }
+
+    .feature-card p {
         font-size: 0.85rem;
+    }
+
+    /* Projects */
+    .project-image {
+        height: 180px;
+    }
+
+    .image-placeholder {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .project-card {
+        margin-bottom: 1rem;
+    }
+
+    .project-info {
+        padding: 1rem;
+    }
+
+    .project-info h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .project-info p {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .project-tabs {
+        gap: 0.3rem;
+        margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.8rem;
+        min-height: 44px;
+    }
+
+    /* Contact */
+    .contact-info {
+        gap: 1.2rem;
+    }
+
+    .info-item {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .info-item h4 {
+        font-size: 1rem;
+    }
+
+    .info-item p {
+        font-size: 0.85rem;
+    }
+
+    .info-icon {
+        font-size: 1.6rem;
+    }
+
+    .contact-form {
+        padding: 1rem;
+        gap: 1.2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 0.8rem;
+        font-size: 16px;
+        min-height: 44px;
+        border-radius: 6px;
+    }
+
+    .contact-form textarea {
+        min-height: 100px;
+    }
+
+    /* Buttons */
+    .cta-button,
+    .submit-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.85rem 1.5rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .modal-content p {
+        font-size: 0.9rem;
+    }
+
+    .close {
+        font-size: 1.8rem;
+        right: 0.5rem;
+        top: 0.5rem;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-logo {
+        width: 45px;
+    }
+}
+
+/* ===== Extra Small Devices (Up to 360px) ===== */
+@media (max-width: 360px) {
+    /* Page Loading Spinner */
+    .spinner {
+        width: 35px;
+        height: 35px;
+        border: 2px solid rgba(21, 235, 57, 0.2);
+        border-top: 2px solid var(--primary-color);
+    }
+
+    .spinner-text {
+        font-size: 0.85rem;
+    }
+
+    .logo strong {
+        font-size: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.2rem;
+    }
+
+    .hero p {
+        font-size: 0.8rem;
+    }
+
+    .about h2,
+    .projects h2,
+    .contact h2 {
+        font-size: 1.4rem;
+    }
+
+    .feature-card {
+        padding: 0.8rem;
+    }
+
+    .project-image {
+        height: 160px;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
     }
 }
