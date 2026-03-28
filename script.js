@@ -190,9 +190,10 @@ const contactForm = document.getElementById('contactForm');
 const successMessage = document.getElementById('successMessage');
 
 contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    // Don't prevent default - let Formspree handle the submission
+    // e.preventDefault();
 
-    // Get form values
+    // Get form values for client-side validation only
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
@@ -205,34 +206,28 @@ contactForm.addEventListener('submit', (e) => {
 
     if (name.length < 2) {
         showError('nameError', 'Name must be at least 2 characters');
+        e.preventDefault(); // Prevent submission if validation fails
         isValid = false;
     }
 
     if (!isValidEmail(email)) {
         showError('emailError', 'Please enter a valid email address');
+        e.preventDefault(); // Prevent submission if validation fails
         isValid = false;
     }
 
     if (message.length < 10) {
         showError('messageError', 'Message must be at least 10 characters');
+        e.preventDefault(); // Prevent submission if validation fails
         isValid = false;
     }
 
-    // If valid, submit
+    // If valid, let the form submit to Formspree
     if (isValid) {
-        // Simulate form submission
-        console.log('Form submitted:', { name, email, message });
-        
-        // Show success message
-        successMessage.classList.add('show');
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Hide success message after 4 seconds
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 4000);
+        // Show loading state
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
     }
 });
 

@@ -307,24 +307,24 @@
                     </div>
                 </div>
 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required id="name">
+                        <input type="text" name="name" placeholder="Your Name" required id="name">
                         <span class="error" id="nameError"></span>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required id="email">
+                        <input type="email" name="email" placeholder="Your Email" required id="email">
                         <span class="error" id="emailError"></span>
                     </div>
                     <div class="form-group">
-                        <input type="tel" placeholder="Your Phone" id="phone">
+                        <input type="tel" name="phone" placeholder="Your Phone" id="phone">
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" rows="5" required id="message"></textarea>
+                        <textarea name="message" placeholder="Your Message" rows="5" required id="message"></textarea>
                         <span class="error" id="messageError"></span>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
-                    <div class="success-message" id="successMessage">Message sent successfully!</div>
+                    <div class="success-message" id="successMessage">Thank you! Your message has been sent successfully.</div>
                 </form>
             </div>
         </div>
