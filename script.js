@@ -274,16 +274,10 @@ const projectDetails = {
         details: 'Location: Nagercoil Kanyakumari | Completion: 2023 | Area: 8,000 sq ft | Budget: ₹1.8 Crores'
     },
     proj5: {
-        title: 'Shopping Mall Complex',
+        title: 'Riya Citadel',
         category: 'Commercial',
-        description: 'A comprehensive shopping mall featuring 200+ retail stores, dining establishments, and entertainment venues. Total built area includes parking for 2,000 vehicles.',
-        details: 'Location: Shopping District | Completion: 2023 | Area: 350,000 sq ft | Budget: $45M'
-    },
-    proj6: {
-        title: 'Tech Park Complex',
-        category: 'Commercial',
-        description: 'A modern tech park featuring 5 interconnected buildings designed for innovation and collaboration. Includes startups incubator, research facilities, and high-speed connectivity.',
-        details: 'Location: Innovation Hub | Completion: 2024 | Area: 200,000 sq ft | Budget: $30M'
+        description: 'A comprehensive commercial rental space, suited for medium retailers.Includes 3 stories with modern amenities, with parking and lift facilities. Located in the bustling Sholinganallur area of Chennai, this project was designed to cater to the needs of growing businesses and retail outlets.',
+        details: 'Location: Sholinganallur Chennai | Completion: 2020 | Area: 8500 sq ft | Budget: ₹2.3 Crores'
     },
     proj7: {
         title: 'Highway Extension Project',
