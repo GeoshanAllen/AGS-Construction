@@ -74,6 +74,7 @@ let carouselAutoplay;
 
 // Images to include from `carousal` folder (injected into carousel)
 const carouselImages = [
+    'Adrian Conclave/Adrian_Conclave.jpg',
     'carousal/AnandRajHouse.png',
     'carousal/c1.jpg',
     'carousal/Riya_Citadel.jpg'
@@ -104,7 +105,7 @@ function buildCarousel() {
 
         const img = document.createElement('img');
         img.className = 'carousel-img';
-        img.src = src;
+        img.src = encodeURI(src);
         img.alt = captionText;
         img.loading = 'lazy';
         imgDiv.appendChild(img);
@@ -269,8 +270,8 @@ const projectDetails = {
     proj4: {
         title: 'Adrian Conclave',
         category: 'Commercial',
-        description: 'A 15-story commercial office building in the heart of the downtown business district. Features modern office spaces, retail shops on ground floor, and advanced building management systems.',
-        details: 'Location: Business District | Completion: 2023 | Area: 120,000 sq ft | Budget: $8.5M'
+        description: 'A 2-story commercial office building in the heart of the Nagercoil Kanyakumari district. Features modern office spaces, retail shop on ground floor with lift facilities and advanced building management systems.',
+        details: 'Location: Nagercoil Kanyakumari | Completion: 2023 | Area: 8,000 sq ft | Budget: ₹1.8 Crores'
     },
     proj5: {
         title: 'Shopping Mall Complex',
