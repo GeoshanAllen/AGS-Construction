@@ -74,10 +74,12 @@ let carouselAutoplay;
 
 // Images to include from `carousal` folder (injected into carousel)
 const carouselImages = [
-    'Adrian Conclave/Adrian_Conclave.jpg',
-    'carousal/AnandRajHouse.png',
-    'carousal/c1.jpg',
-    'carousal/Riya_Citadel.jpg'
+    'carousal/Adrian_Enclave.jpg',
+    'carousal/Ongoing_Construction.jpg',
+    'carousal/Pile_Foundation.jpg',
+    'carousal/Retrofitting_Services.jpg',
+    'carousal/Riya_Citadel.jpg',
+    'carousal/Sholinganallur_Project.png'
 ];
 
 function getCaptionFromFilename(src) {
@@ -268,7 +270,7 @@ const projectDetails = {
         details: 'Location: Suburban Area | Completion: 2024 | Area: 55,000 sq ft | Budget: $18M'
     },
     proj4: {
-        title: 'Adrian Conclave',
+        title: 'Adrian Enclave',
         category: 'Commercial',
         description: 'A 2-story commercial office building in the heart of the Nagercoil Kanyakumari district. Features modern office spaces, retail shop on ground floor with lift facilities and advanced building management systems.',
         details: 'Location: Nagercoil Kanyakumari | Completion: 2023 | Area: 8,000 sq ft | Budget: ₹1.8 Crores'
@@ -279,7 +281,7 @@ const projectDetails = {
         description: 'A comprehensive commercial rental space, suited for medium retailers.Includes 3 stories with modern amenities, with parking and lift facilities. Located in the bustling Sholinganallur area of Chennai, this project was designed to cater to the needs of growing businesses and retail outlets.',
         details: 'Location: Sholinganallur Chennai | Completion: 2020 | Area: 8500 sq ft | Budget: ₹2.3 Crores'
     },
-    
+
     proj6: {
         title: 'Tech Park Complex',
         category: 'Commercial',
