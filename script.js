@@ -80,8 +80,6 @@ const carouselImages = [
     'carousal/Ongoing_Construction.jpg',
     'carousal/Pile_Foundation.jpg',
     'carousal/Retrofitting_Services.jpg'
-
-
 ];
 
 function getCaptionFromFilename(src) {
