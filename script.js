@@ -72,6 +72,58 @@ function scrollToSection(sectionId) {
 let carouselIndex = 1;
 let carouselAutoplay;
 
+// Images to include from `carousal` folder (injected into carousel)
+const carouselImages = [
+    'carousal/AnandRajHouse.png',
+    'carousal/c1.jpg',
+    'carousal/Riya_Citadel.jpg'
+];
+
+function getCaptionFromFilename(src) {
+    const base = src.split('/').pop().replace(/\.[^/.]+$/, '');
+    return base.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function buildCarousel() {
+    const inner = document.getElementById('carouselInner') || document.querySelector('.carousel-inner');
+    const indicators = document.getElementById('carouselIndicators') || document.querySelector('.carousel-indicators');
+    if (!inner || !indicators) return;
+
+    inner.innerHTML = '';
+    indicators.innerHTML = '';
+
+    carouselImages.forEach((src, idx) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        if (idx === 0) item.classList.add('active');
+
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'carousel-image';
+
+        const captionText = getCaptionFromFilename(src);
+
+        const img = document.createElement('img');
+        img.className = 'carousel-img';
+        img.src = src;
+        img.alt = captionText;
+        img.loading = 'lazy';
+        imgDiv.appendChild(img);
+
+        const caption = document.createElement('span');
+        caption.className = 'carousel-caption';
+        caption.textContent = captionText;
+        imgDiv.appendChild(caption);
+
+        item.appendChild(imgDiv);
+        inner.appendChild(item);
+
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.addEventListener('click', () => currentSlide(idx + 1));
+        indicators.appendChild(dot);
+    });
+}
+
 function showSlide(n) {
     const slides = document.querySelectorAll('.carousel-item');
     const dots = document.querySelectorAll('.dot');
@@ -115,6 +167,7 @@ function resetAutoplay() {
 
 // Initialize carousel
 window.addEventListener('load', () => {
+    buildCarousel();
     showSlide(carouselIndex);
     resetAutoplay();
     initTouchCarousel();
@@ -214,7 +267,7 @@ const projectDetails = {
         details: 'Location: Suburban Area | Completion: 2024 | Area: 55,000 sq ft | Budget: $18M'
     },
     proj4: {
-        title: 'Downtown Office Building',
+        title: 'Adrian Conclave',
         category: 'Commercial',
         description: 'A 15-story commercial office building in the heart of the downtown business district. Features modern office spaces, retail shops on ground floor, and advanced building management systems.',
         details: 'Location: Business District | Completion: 2023 | Area: 120,000 sq ft | Budget: $8.5M'
