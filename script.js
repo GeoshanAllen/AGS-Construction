@@ -74,12 +74,14 @@ let carouselAutoplay;
 
 // Images to include from `carousal` folder (injected into carousel)
 const carouselImages = [
-    'carousal/Adrian_Enclave.jpg',
+    'carousal/Adrian_Enclave.png',
+    'carousal/Riya_Citadel.png',
+    'carousal/Sholinganallur_Project.png',
     'carousal/Ongoing_Construction.jpg',
     'carousal/Pile_Foundation.jpg',
-    'carousal/Retrofitting_Services.jpg',
-    'carousal/Riya_Citadel.jpg',
-    'carousal/Sholinganallur_Project.png'
+    'carousal/Retrofitting_Services.jpg'
+
+
 ];
 
 function getCaptionFromFilename(src) {
